@@ -1,0 +1,28 @@
+Rails:
+  Enabled: true
+AllCops:
+  Include:
+    - '**/Gemfile'
+    - '**/Rakefile'
+  Exclude:
+   - 'bin/*'
+   - 'db/seeds.rb'
+   - 'db/migrate/*'
+   - 'db/schema.rb'
+   - 'vendor/bundle/**/*'
+Documentation:
+  Enabled: false
+Metrics/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 10
+Style/CaseIndentation:
+  Enabled: false
+Style/StructInheritance:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/DotPosition:
+  Enabled: false
+ClassLength:
+  Max: 250
