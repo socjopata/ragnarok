@@ -23,5 +23,9 @@
 # Rubymine
 .idea
 
+# node
+node_modules
+npm-debug.log
+
 #Database.yml
-/config/database.yml
+config/database.yml
