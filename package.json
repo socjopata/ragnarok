@@ -1,0 +1,13 @@
+{
+  "name": "ragnarok",
+  "version": "1.0.0",
+  "engines": {
+    "node": "6.6.0",
+    "npm": "3.10.3"
+  },
+  "scripts": {
+    "postinstall": "cd client && npm install",
+    "rails-server": "echo 'visit http://localhost:3000/' && foreman start -f Procfile.dev",
+    "test": "rspec"
+  }
+}

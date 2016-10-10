@@ -1,24 +1,45 @@
-var path = require ('path');
+const webpack = require('webpack');
+const path = require('path');
 
-module.exports = {
+const devBuild = process.env.NODE_ENV !== 'production';
+const nodeEnv = devBuild ? 'development' : 'production';
+
+const config = {
   context: __dirname,
-  entry: {
-    app: '../app/assets/javascripts/'
-  },
+  entry: [
+    './app/bundles/HomeComponent/startup/HomeComponentApp',
+  ],
   output: {
     filename: 'main.js',
-    path: __dirname + 'app/assets/javascripts/bundled'
+    path: '../app/assets/javascripts/generated'
   },
   devtool: 'eval-source-map',
   resolve: {
+    alias: {
+      react: path.resolve('./node_modules/react'),
+      'react-dom': path.resolve('./node_modules/react-dom'),
+    },
     modulesDirectories: [
       "node_modules",
       "assets/javascripts/components"
     ],
-    root: path.resolve(".app")
+    root: path.resolve(".app"),
     extensions: ['', '.js', '.jsx']
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(nodeEnv),
+      },
+    }),
+  ],
   module: {
+    loaders: [
+      {
+        test: require.resolve('react'),
+        loader: 'imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham',
+      },
+    ],
     preLoaders: [
       {
         test: /\.jsx?$/,
@@ -38,3 +59,15 @@ module.exports = {
     ]
   }
 };
+
+module.exports = config;
+
+if (devBuild) {
+  console.log('Webpack dev build for Rails'); // eslint-disable-line no-console
+  module.exports.devtool = 'eval-source-map';
+} else {
+  config.plugins.push(
+    new webpack.optimize.DedupePlugin()
+  );
+  console.log('Webpack production build for Rails'); // eslint-disable-line no-console
+}

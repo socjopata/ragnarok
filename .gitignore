@@ -29,3 +29,6 @@ npm-debug.log
 
 #Database.yml
 config/database.yml
+
+# Generated js bundles
+/app/assets/javascripts/generated/*
