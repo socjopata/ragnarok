@@ -11,6 +11,7 @@ gem 'react_on_rails'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'mini_racer', platforms: :ruby
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -25,5 +26,3 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
-gem 'mini_racer', platforms: :ruby

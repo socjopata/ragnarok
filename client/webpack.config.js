@@ -1,13 +1,14 @@
-const webpack = require('webpack');
-const path = require('path');
+// Common client-side webpack configuration used by webpack.hot.config and webpack.rails.config.
 
-const devBuild = process.env.NODE_ENV !== 'production';
-const nodeEnv = devBuild ? 'development' : 'production';
+const webpack = require("webpack");
+const path = require("path");
+
+const devBuild = process.env.NODE_ENV !== "production";
+const nodeEnv = devBuild ? "development" : "production";
 
 const config = {
-  context: __dirname,
   entry: [
-    './app/bundles/HomeComponent/startup/HomeComponentApp',
+    './app/bundles/HomeComponent/startup/HomeComponentApp'
   ],
   output: {
     filename: 'main.js',
@@ -20,11 +21,10 @@ const config = {
       'react-dom': path.resolve('./node_modules/react-dom'),
     },
     modulesDirectories: [
-      "node_modules",
-      "assets/javascripts/components"
-    ],
-    root: path.resolve(".app"),
-    extensions: ['', '.js', '.jsx']
+      "node_modules",
+      "app/bundles/HomeComponent"
+    ],
+    extensions: ['', '.js', '.jsx', '.json']
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -36,28 +36,34 @@ const config = {
   module: {
     loaders: [
       {
-        test: require.resolve('react'),
-        loader: 'imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham',
-      },
-    ],
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'source-map'
-      }
-    ],
-    loaders: [
-      {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['react', 'es2015', 'stage-0']
+          cacheDirectory: true,
+          presets: ['react', 'es2015', 'latest', 'stage-0']
         }
-      }
-    ]
-  }
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['react', 'es2015', 'latest', 'stage-0']
+        },
+      },
+    ],
+    externals: {
+       'cheerio': 'window',
+       'react/addons': true,
+       'react/lib/ExecutionEnvironment': true,
+       'react/lib/ReactContext': true
+    },
+  },
 };
 
 module.exports = config;
