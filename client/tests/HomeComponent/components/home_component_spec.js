@@ -1,15 +1,14 @@
-import React from "react";
+import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import HomeComponent from 'HomeComponent/components/HomeComponent';
 
-describe("HomeComponent", () => {
+describe('HomeComponent', () => {
   let subjectComponent, renderSubject;
 
   beforeEach(() => {
     renderSubject = () => {
-      return mount(<HomeComponent />);
-    };
-
+      return mount(<HomeComponent />);
+    };
     subjectComponent = renderSubject();
   });
 
