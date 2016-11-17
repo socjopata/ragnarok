@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20161017121709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "heros", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "parameters", force: :cascade do |t|
+    t.integer "value"
+    t.string  "name"
+    t.string  "type"
+    t.integer "hero_id"
+    t.index ["hero_id"], name: "index_parameters_on_hero_id", using: :btree
+  end
+
+  add_foreign_key "parameters", "heros"
 end

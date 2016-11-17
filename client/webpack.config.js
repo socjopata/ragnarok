@@ -1,14 +1,14 @@
 // Common client-side webpack configuration used by webpack.hot.config and webpack.rails.config.
 
-const webpack = require("webpack");
-const path = require("path");
+const webpack = require('webpack');
+const path = require('path');
 
-const devBuild = process.env.NODE_ENV !== "production";
-const nodeEnv = devBuild ? "development" : "production";
+const devBuild = process.env.NODE_ENV !== 'production';
+const nodeEnv = devBuild ? 'development' : 'production';
 
 const config = {
   entry: [
-    './app/bundles/HomeComponent/startup/HomeComponentApp'
+    './app/bundles/HomeComponent/startup/HomeComponentApp',
   ],
   output: {
     filename: 'main.js',
@@ -21,8 +21,8 @@ const config = {
       'react-dom': path.resolve('./node_modules/react-dom'),
     },
     modulesDirectories: [
-      "node_modules",
-      "app/bundles/HomeComponent"
+      'node_modules',
+      'app/bundles/HomeComponent'
     ],
     extensions: ['', '.js', '.jsx', '.json']
   },
@@ -58,10 +58,10 @@ const config = {
       },
     ],
     externals: {
-       'cheerio': 'window',
-       'react/addons': true,
-       'react/lib/ExecutionEnvironment': true,
-       'react/lib/ReactContext': true
+     'cheerio': 'window',
+     'react/addons': true,
+     'react/lib/ExecutionEnvironment': true,
+     'react/lib/ReactContext': true
     },
   },
 };

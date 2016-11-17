@@ -1,0 +1,2 @@
+class BaseParameter < Parameter
+end

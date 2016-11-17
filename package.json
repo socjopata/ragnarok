@@ -9,5 +9,11 @@
     "postinstall": "cd client && npm install",
     "rails-server": "echo 'visit http://localhost:3000/' && foreman start -f Procfile.dev",
     "test": "rspec"
+  },
+  "devDependencies": {
+    "eslint": "^3.8.0",
+    "eslint-config-google": "^0.6.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.4.1"
   }
 }

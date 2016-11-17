@@ -14,7 +14,8 @@
     "html-loader": "^0.4.4",
     "install": "^0.8.1",
     "react-dropdown": "^1.1.0",
-    "react-on-rails": "6.1.1"
+    "react-on-rails": "6.1.1",
+    "react-translate-component": "^0.13.1"
   },
   "devDependencies": {
     "babel": "6.5.2",
@@ -48,6 +49,7 @@
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-translate-component": "^0.13.1",
     "source-map-loader": "^0.1.5",
     "webpack": "^1.13.2"
   },
