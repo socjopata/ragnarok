@@ -1,19 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+Here are some basic information how to setup and run the project. Hopefully there will be a proper Readme in the future.
 
 * Ruby version
 2.3.1
 
-* System dependencies
-** NPM
-
-** Webpack
+System dependencies
+* NPM
+* Webpack
 ```
-sudo su && npm install webpack -g
+sudo su
+npm install webpack -g
 npm install
 ```
 
@@ -24,6 +21,7 @@ npm run rails-server
 ```
 
 * Database creation
+
 After you edit your settings in database.ym; (See database.example.yml)
 
 ```
