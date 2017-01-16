@@ -29,6 +29,9 @@ rake db:create db:migrate db:seed
 ```
 
 * How to run the test suite
+```
+npm test
+```
 
 * Services (job queues, cache servers, search engines, etc.)
 
