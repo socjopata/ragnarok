@@ -7,7 +7,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'fuubar'
-gem 'react_on_rails'
+gem "react_on_rails", "~> 7"
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
@@ -17,7 +17,6 @@ gem "responders"
 gem "roar-rails"
 
 group :development, :test do
-  gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'pry-rails'
   gem 'rails-controller-testing'

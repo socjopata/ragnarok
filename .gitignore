@@ -31,4 +31,4 @@ npm-debug.log
 config/database.yml
 
 # Generated js bundles
-/app/assets/javascripts/generated/*
+/app/assets/webpack/*
