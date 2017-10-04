@@ -1,79 +1,80 @@
-// Common client-side webpack configuration used by webpack.hot.config and webpack.rails.config.
+/* eslint comma-dangle: ["error",
+ {"functions": "never", "arrays": "only-multiline", "objects":
+ "only-multiline"} ] */
 
-const webpack = require('webpack');
-const path = require('path');
+const webpack = require("webpack");
+const pathLib = require("path");
 
-const devBuild = process.env.NODE_ENV !== 'production';
-const nodeEnv = devBuild ? 'development' : 'production';
+const devBuild = process.env.NODE_ENV !== "production";
+
+const outputDirectory = devBuild ? "webpack" : "javascripts";
+const outputPath = `${__dirname}/../app/assets/${outputDirectory}`;
 
 const config = {
   entry: [
-    './app/bundles/HomeComponent/startup/HomeComponentApp',
+    "es5-shim/es5-shim",
+    "es5-shim/es5-sham",
+    "babel-polyfill",
+    "./app/registration"
   ],
+
   output: {
-    filename: 'main.js',
-    path: '../app/assets/javascripts/generated'
+    filename: "webpack-bundle.js",
+    path: outputPath
   },
-  devtool: 'eval-source-map',
+
   resolve: {
-    alias: {
-      react: path.resolve('./node_modules/react'),
-      'react-dom': path.resolve('./node_modules/react-dom'),
-    },
-    modulesDirectories: [
-      'node_modules',
-      'app/bundles/HomeComponent'
-    ],
-    extensions: ['', '.js', '.jsx', '.json']
+    alias: { react: pathLib.resolve("./node_modules/react") },
+    extensions: ["*", ".js", ".jsx"],
+    modules: ["app", "node_modules"]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(nodeEnv),
+    new webpack.EnvironmentPlugin({ NODE_ENV: "development" }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
       },
-    }),
+      mangle: true,
+      output: {
+        comments: false
+      }
+    })
   ],
   module: {
-    loaders: [
+    rules: [
+      {
+        test: require.resolve("react"),
+        use: {
+          loader: "imports-loader",
+          options: { shim: "es5-shim/es5-shim", sham: "es5-shim/es5-sham" }
+        },
+      },
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
+        use: "babel-loader",
         exclude: /node_modules/,
-        query: {
-          cacheDirectory: true,
-          presets: ['react', 'es2015', 'latest', 'stage-0']
-        }
       },
       {
-        test: /\.json$/,
-        loader: 'json'
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015', 'latest', 'stage-0']
-        },
-      },
+        test: /\.css$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" }
+        ]
+      }
     ],
-    externals: {
-     'cheerio': 'window',
-     'react/addons': true,
-     'react/lib/ExecutionEnvironment': true,
-     'react/lib/ReactContext': true
-    },
+    loaders: [
+      { exclude: ["node_modules"], loader: "babel", test: /\\.jsx?$/ },
+      { loader: "url-loader", test: /\\.gif$/ },
+      { loader: "file-loader", test: /\\.(ttf|eot|svg)$/ },
+    ]
   },
 };
 
 module.exports = config;
 
 if (devBuild) {
-  console.log('Webpack dev build for Rails'); // eslint-disable-line no-console
-  module.exports.devtool = 'eval-source-map';
+  console.log("Webpack dev build for Rails"); // eslint-disable-line no-console
+  module.exports.devtool = "eval-source-map";
 } else {
-  config.plugins.push(
-    new webpack.optimize.DedupePlugin()
-  );
-  console.log('Webpack production build for Rails'); // eslint-disable-line no-console
+  console.log("Webpack production build for Rails"); // eslint-disable-line no-console
 }

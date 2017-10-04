@@ -1,19 +1,13 @@
 {
   "name": "ragnarok",
   "version": "1.0.0",
-  "engines": {
-    "node": "6.6.0",
-    "npm": "3.10.3"
-  },
+  "private": true,
   "scripts": {
-    "postinstall": "cd client && npm install",
-    "rails-server": "echo 'visit http://localhost:3000/' && foreman start -f Procfile.dev",
-    "test": "rspec && cd client && npm run test"
-  },
-  "devDependencies": {
-    "eslint": "^3.8.0",
-    "eslint-config-google": "^0.6.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.4.1"
+    "postinstall": "cd client && yarn install",
+    "start": "foreman start -f Procfile.dev",
+    "test": "rspec && cd client && yarn test",
+    "test:watch": "cd client && yarn test:watch",
+    "test:ci": "cd client && yarn test:ci",
+    "eslint": "cd client && yarn eslint"
   }
 }
